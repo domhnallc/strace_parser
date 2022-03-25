@@ -1,9 +1,9 @@
 import os
 import csv
 
-dirToRead = '/media/dcarlin/6TB/straces/arm_and_x86_straces'
+dirToRead = './'
 all_dicts = []
-CSV_to_write = '/media/dcarlin/6TB/straces/arm_and_x86_straces.csv'
+CSV_to_write = './straces.csv'
 
 # opens strace file, parses syscall and count into dict{} and adds to all_dicts
 def fileReader(fileToOpen):
