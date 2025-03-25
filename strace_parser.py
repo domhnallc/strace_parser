@@ -8,7 +8,7 @@ all_dicts = []
 # opens strace file, parses syscall and count into dict{} and adds to all_dicts
 def fileReader(fileToOpen):
     with open(fileToOpen, 'r', errors='ignore') as f:
-        lines = f.readlines()[2:-1]
+        lines = f.readlines()[2:-2]
         dict = {}
         dict.update({'filename': str(fileToOpen)})
         for line in lines:
