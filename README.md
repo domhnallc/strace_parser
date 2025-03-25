@@ -31,8 +31,12 @@ python strace_parser.py -d /examples -o ./examples.csv
 ```
 Output:
 ```
-Filename, syscall1,syscall2,syscall3
-<File>, count,count,count
+filename	access	alarm	arch_prctl	brk	close	close_range	connect	execve	fcntl	futex	getdents64 ...
+./examples/example3.strace	1		2	3	9		2	1			
+./examples/example2.strace	2	15	2	3	9			1	10		
+./examples/example1.strace	2		2	3	9			1			2
+./examples/example4.strace	2		2	7	21	1	2	1		17	
+
 ...
 ```
 
