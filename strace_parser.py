@@ -1,5 +1,7 @@
 import os
 import csv
+import argparse
+
 
 dirToRead = './'
 all_dicts = []
@@ -31,7 +33,17 @@ def create_headers():
         for d in all_dicts:
             writer.writerow(d)
 
+def get_options():
+    
+    parser = argparse.ArgumentParser(description='Parse strace output to CSV')
+    parser.add_argument('-d', '--dir', help='Directory to read strace files from', required=True)
+    parser.add_argument('-o', '--output', help='Output CSV file', required=True)
+    args = parser.parse_args()
+    dirToRead = args.dir
+    CSV_to_write = args.output
+
 def main():
+    get_options()
     for f in os.listdir(dirToRead):
         print(os.path.join(dirToRead, f))
         fileReader(os.path.join(dirToRead, f))
