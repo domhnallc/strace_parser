@@ -52,7 +52,7 @@ def check_input_dir_exits(dirToRead):
     
 def check_output_file(CSV_to_write):
     if os.path.exists(CSV_to_write):
-        print("CSV file already exists")
+        print("Error: CSV file already exists")
         exit()
     else:
         return CSV_to_write
