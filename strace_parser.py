@@ -3,9 +3,7 @@ import csv
 import argparse
 
 
-dirToRead = './' #default or user input
 all_dicts = []
-CSV_to_write = './straces.csv' #default or user input
 
 # opens strace file, parses syscall and count into dict{} and adds to all_dicts
 def fileReader(fileToOpen):
@@ -22,7 +20,7 @@ def fileReader(fileToOpen):
         print(dict)
         all_dicts.append(dict)
 
-def create_headers():
+def create_headers(CSV_to_write):
     fieldnames = set()
     fieldnames.update(*(d.keys() for d in all_dicts))
     #fieldnames.add(str("filename"))
@@ -43,11 +41,14 @@ def get_options():
     dirToRead = args.dir
     CSV_to_write = args.output
 
+    return dirToRead, CSV_to_write
+
 def main():
-    get_options()
+    dirToRead = get_options()[0]
+    CSV_to_write = get_options()[1]
     for f in os.listdir(dirToRead):
         print(os.path.join(dirToRead, f))
         fileReader(os.path.join(dirToRead, f))
-    create_headers()
+    create_headers(CSV_to_write)
 
 main()
