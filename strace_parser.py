@@ -49,10 +49,17 @@ def check_input_dir_exits(dirToRead):
         exit()
     else:
         return dirToRead
+    
+def check_output_file(CSV_to_write):
+    if os.path.exists(CSV_to_write):
+        print("CSV file already exists")
+        exit()
+    else:
+        return CSV_to_write
 
 def main():
-    dirToRead = get_options()[0]
-    CSV_to_write = get_options()[1]
+    dirToRead = check_input_dir_exits(get_options()[0])
+    CSV_to_write = check_output_file(get_options()[1])
     for f in os.listdir(dirToRead):
         print(os.path.join(dirToRead, f))
         fileReader(os.path.join(dirToRead, f))
