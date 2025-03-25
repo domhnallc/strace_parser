@@ -1,4 +1,29 @@
 import os
+"""
+This script parses the output of `strace` command from files in a specified directory
+and generates a CSV file containing the parsed data.
+Functions:
+    fileReader(fileToOpen):
+        Reads a single strace file, parses system call counts, and stores the data in a dictionary.
+        Skips processing if the input is a directory.
+    create_headers(CSV_to_write):
+        Creates a CSV file with headers based on the parsed data and writes the data to the file.
+    get_options():
+        Parses command-line arguments to get the input directory and output CSV file path.
+    check_input_dir_exits(dirToRead):
+        Verifies if the specified input directory exists. Exits the program if it does not.
+    check_output_file(CSV_to_write):
+        Checks if the specified output CSV file already exists. Exits the program if it does.
+    main():
+        Main function that orchestrates the parsing of strace files and the creation of the CSV file.
+Command-line Usage:
+    python strace_parser.py -d <strace_directory_to_read> -o <output_csv_file>
+Arguments:
+    -d, --dir: Directory containing strace files to be parsed.
+    -o, --output: Path to the output CSV file.
+Global Variables:
+    all_dicts: A list to store dictionaries containing parsed data from each strace file.
+"""
 import csv
 import argparse
 
