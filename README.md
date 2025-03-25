@@ -29,7 +29,7 @@ Parses a folder of strace outputs, counts syscalls and returns a CSV.
 ```bash
 python strace_parser.py -d /examples -o ./examples.csv
 ```
-Output:
+### Output (truncated):
 | Filename                  | access | alarm | arch_prctl | brk | close | close_range | connect | execve | fcntl | futex | getdents64 |
 |---------------------------|--------|-------|------------|-----|-------|-------------|---------|--------|-------|-------|------------|
 | ./examples/example3.strace | 1      |       | 2          | 3   | 9     |             | 2       | 1      |       |       |            |
@@ -37,8 +37,6 @@ Output:
 | ./examples/example1.strace | 2      |       | 2          | 3   | 9     |             | 1       |        |       | 2     |            |
 | ./examples/example4.strace | 2      |       | 2          | 7   | 21    | 1           | 2       | 1      |       | 17    |            |
 
-...
-```
 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request.
