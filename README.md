@@ -5,6 +5,8 @@ Parses a folder of strace outputs, counts syscalls and returns a CSV.
 - Counts occurrences of each system call.
 - Outputs the results in a CSV format for easy analysis.
 
+*NOTE*: this does not create the strace files, it simply parses them.
+
 ## Installation
 1. Clone the repository:
     ```bash
