@@ -22,10 +22,11 @@ def fileReader(fileToOpen):
         all_dicts.append(dict)
 
 def create_headers(CSV_to_write):
-    fieldnames = sorted({key for d in all_dicts for key in d.keys()})
+    fieldnames = sorted({key for d in all_dicts for key in d.keys() if key != 'filename'})
+    fieldnames.insert(0, 'filename')  # Ensure 'filename' is at the start
     print(fieldnames)
     with open(CSV_to_write, 'a', newline='') as f:
-        writer=csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         for d in all_dicts:
             writer.writerow(d)
