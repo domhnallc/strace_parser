@@ -1,0 +1,5 @@
+write,connect,socket,futex,geteuid,rt_sigaction,set_robust_list,set_tid_address,read,access,newfstatat,mprotect,openat,getuid,pread64,fcntl,alarm,brk,getpid,----------------,getrandom,munmap,rseq,statfs,close_range,ioctl,mmap,lseek,prlimit64,filename,arch_prctl,close,getdents64,kill,umask,execve
+1,2,2,,1,,1,1,4,1,9,4,5,,4,,,3,,---------,1,1,1,,,,9,1,1,./examples/example3.strace,2,9,,,,1
+1,,,,,10,1,1,5,2,9,4,10,,9,10,15,3,,---------,1,1,1,,,,10,2,1,./examples/example2.strace,2,9,,1,,1
+1,,,,,,1,1,5,2,8,7,7,,4,,,3,,---------,1,1,1,2,,2,18,,1,./examples/example1.strace,2,9,2,,,1
+1,2,2,17,,,1,1,22,2,21,21,19,1,4,,,7,6,---------,2,1,1,2,1,,59,1,1,./examples/example4.strace,2,21,,,1,1
