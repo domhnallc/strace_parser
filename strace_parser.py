@@ -22,8 +22,7 @@ def fileReader(fileToOpen):
         all_dicts.append(dict)
 
 def create_headers(CSV_to_write):
-    fieldnames = set()
-    fieldnames.update(*(d.keys() for d in all_dicts))
+    fieldnames = sorted({key for d in all_dicts for key in d.keys()})
     print(fieldnames)
     with open(CSV_to_write, 'a', newline='') as f:
         writer=csv.DictWriter(f, fieldnames=fieldnames)
