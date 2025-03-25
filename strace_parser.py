@@ -24,7 +24,6 @@ def fileReader(fileToOpen):
 def create_headers(CSV_to_write):
     fieldnames = set()
     fieldnames.update(*(d.keys() for d in all_dicts))
-    #fieldnames.add(str("filename"))
     print(fieldnames)
     with open(CSV_to_write, 'a', newline='') as f:
         writer=csv.DictWriter(f, fieldnames=fieldnames)
@@ -43,6 +42,13 @@ def get_options():
     CSV_to_write = args.output
 
     return dirToRead, CSV_to_write
+
+def check_input_dir_exits(dirToRead):
+    if not os.path.isdir(dirToRead):
+        print("Directory does not exist")
+        exit()
+    else:
+        return dirToRead
 
 def main():
     dirToRead = get_options()[0]
