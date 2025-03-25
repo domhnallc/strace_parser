@@ -36,6 +36,7 @@ def create_headers():
 def get_options():
     
     parser = argparse.ArgumentParser(description='Parse strace output to CSV')
+    parser.usage = "python strace_parser.py -d <strace_directory_to_read> -o <output_csv_file>"
     parser.add_argument('-d', '--dir', help='Directory to read strace files from', required=True)
     parser.add_argument('-o', '--output', help='Output CSV file', required=True)
     args = parser.parse_args()
