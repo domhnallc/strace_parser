@@ -7,16 +7,20 @@ all_dicts = []
 
 # opens strace file, parses syscall and count into dict{} and adds to all_dicts
 def fileReader(fileToOpen):
-    with open(fileToOpen, 'r', errors='ignore') as f:
-        lines = f.readlines()[2:-2]
-        dict = {}
-        dict.update({'filename': str(fileToOpen)})
-        for line in lines:
-            tokens = line.split()
-            if len(tokens) == 6:
-                dict[tokens[5]] = tokens[3]
-            elif len(tokens) == 5:
-                dict[tokens[4]] = tokens[3]
+    if fileToOpen.isdir():
+        print("Error: File is a directory")
+        return  # Skip processing if the file is a directory
+    else:
+        with open(fileToOpen, 'r', errors='ignore') as f:
+            lines = f.readlines()[2:-2]
+            dict = {}
+            dict.update({'filename': str(fileToOpen)})
+            for line in lines:
+                tokens = line.split()
+                if len(tokens) == 6:
+                    dict[tokens[5]] = tokens[3]
+                elif len(tokens) == 5:
+                    dict[tokens[4]] = tokens[3]
         
         print(dict)
         all_dicts.append(dict)
