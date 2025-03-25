@@ -7,8 +7,8 @@ all_dicts = []
 
 # opens strace file, parses syscall and count into dict{} and adds to all_dicts
 def fileReader(fileToOpen):
-    if fileToOpen.isdir():
-        print("Error: File is a directory")
+    if os.path.isdir(fileToOpen):
+        print("Error: File is a directory, skipping")
         return  # Skip processing if the file is a directory
     else:
         with open(fileToOpen, 'r', errors='ignore') as f:
