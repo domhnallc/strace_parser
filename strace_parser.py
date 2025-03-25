@@ -10,13 +10,14 @@ def fileReader(fileToOpen):
     with open(fileToOpen, 'r', errors='ignore') as f:
         lines = f.readlines()[2:-1]
         dict = {}
+        dict.update({'filename': str(fileToOpen)})
         for line in lines:
             tokens = line.split()
             if len(tokens) == 6:
                 dict[tokens[5]] = tokens[3]
             elif len(tokens) == 5:
                 dict[tokens[4]] = tokens[3]
-        dict.update({'filename': str(fileToOpen)})
+        
         print(dict)
         all_dicts.append(dict)
 
