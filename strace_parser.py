@@ -30,7 +30,7 @@ def create_headers(CSV_to_write):
     fieldnames.insert(0, 'filename')  # Ensure 'filename' is at the start
     print(fieldnames)
     with open(CSV_to_write, 'a', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=fieldnames, escapechar="\\")
         writer.writeheader()
         for d in all_dicts:
             writer.writerow(d)
