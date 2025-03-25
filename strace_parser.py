@@ -3,9 +3,9 @@ import csv
 import argparse
 
 
-dirToRead = './'
+dirToRead = './' #default or user input
 all_dicts = []
-CSV_to_write = './straces.csv'
+CSV_to_write = './straces.csv' #default or user input
 
 # opens strace file, parses syscall and count into dict{} and adds to all_dicts
 def fileReader(fileToOpen):
