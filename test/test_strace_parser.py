@@ -1,8 +1,8 @@
 import os
 import csv
 import unittest
-from unittest.mock import patch, mock_open, MagicMock
-from strace_parser import fileReader, create_headers, check_input_dir_exits, check_output_file, all_dicts
+from unittest.mock import patch
+from strace_parser.strace_parser import fileReader, create_headers, check_input_dir_exits, check_output_file, all_dicts
 
 class TestStraceParser(unittest.TestCase):
 
