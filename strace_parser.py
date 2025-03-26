@@ -84,7 +84,7 @@ def create_headers(CSV_to_write, label=None):
     fieldnames.insert(0, 'filename')  # Ensure 'filename' is the first column
     fieldnames.insert(1, 'label')  # Ensure 'label' is the second column
     if label:
-        for dict in all_dicts:
+        for d in all_dicts:
             d['label'] = label  # Set a default value for the 'label' column for all rows
     print(fieldnames)
     with open(CSV_to_write, 'a', newline='') as f:
@@ -112,12 +112,8 @@ def get_options():
     parser.add_argument('-l','--label', help='Label to add to the label column of the CSV file for ML. '
     'Default includes column and zero for all.', required=False)
     args = parser.parse_args()
-    dirToRead = args.dir
-    CSV_to_write = args.output
-    if args.label is not None:
-        return dirToRead, CSV_to_write, args.label
-    else:
-        return dirToRead, CSV_to_write
+    
+    return args.known_args()
     
 def check_input_dir_exits(dirToRead):
     """
@@ -172,10 +168,10 @@ def main():
         Any exceptions raised by the helper functions used within this function.
     """
 
-    dirToRead = check_input_dir_exits(get_options()[0])
-    CSV_to_write = check_output_file(get_options()[1])
-    if get_options()[2] is not None:
-        label = get_options()[2]
+    dirToRead = check_input_dir_exits(get_options().args.dir)
+    CSV_to_write = check_output_file(get_options().args.output)
+    if get_options().args.label:
+        label = get_options().args.label
     else:
         label = None
     for f in os.listdir(dirToRead):
