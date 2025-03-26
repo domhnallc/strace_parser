@@ -1,5 +1,33 @@
 # strace_parser
 Parses a folder of strace outputs, counts syscalls and returns a CSV.
+
+The outputs should be strace -c:
+
+``` strace -c ls > /dev/null```
+
+### Example Input file (strace -c)
+
+| % time | seconds  | usecs/call | calls  | errors | syscall      |
+|--------|----------|------------|--------|--------|--------------|
+| 89.76  | 0.008016 | 4          | 1912   |        | getdents     |
+| 8.71   | 0.000778 | 0          | 11778  |        | lstat        |
+| 0.81   | 0.000072 | 0          | 8894   |        | write        |
+| 0.60   | 0.000054 | 0          | 943    |        | open         |
+| 0.11   | 0.000010 | 0          | 942    |        | close        |
+| 0.00   | 0.000000 | 0          | 1      |        | read         |
+| 0.00   | 0.000000 | 0          | 944    |        | fstat        |
+| 0.00   | 0.000000 | 0          | 8      |        | mmap         |
+| 0.00   | 0.000000 | 0          | 4      |        | mprotect     |
+| 0.00   | 0.000000 | 0          | 1      |        | munmap       |
+| 0.00   | 0.000000 | 0          | 7      |        | brk          |
+| 0.00   | 0.000000 | 0          | 3      | 3      | access       |
+| 0.00   | 0.000000 | 0          | 1      |        | execve       |
+| 0.00   | 0.000000 | 0          | 1      |        | sysinfo      |
+| 0.00   | 0.000000 | 0          | 1      |        | arch_prctl   |
+|--------|----------|------------|--------|--------|--------------|
+| 100.00 | 0.008930 |            | 25440  | 3      | total        |
+
+
 ## Features
 - Parses multiple strace output files in a specified folder.
 - Counts occurrences of each system call.
