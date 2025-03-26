@@ -113,8 +113,7 @@ def get_options():
     'Default includes column and zero for all.', required=False)
     args = parser.parse_args()
     
-    return args.known_args()
-    
+    return args
 def check_input_dir_exits(dirToRead):
     """
     Checks if the specified directory exists.
