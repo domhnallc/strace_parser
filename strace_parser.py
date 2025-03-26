@@ -1,22 +1,23 @@
-
-import os
-'''
+"""
 This script processes strace output files from a specified directory and writes the parsed data to a CSV file. 
 It includes functions for reading and parsing files, validating input and output paths, and generating a CSV 
 with appropriate headers.
 Functions:
     - fileReader(fileToOpen): Reads a file, extracts syscall data, and appends it to a global list of dictionaries.
-    - create_headers(CSV_to_write): Creates a CSV file with headers and writes the parsed data to it.
-    - get_options(): Parses command-line arguments for input directory and output CSV file.
+    - create_headers(CSV_to_write, label): Creates a CSV file with headers and writes the parsed data to it. 
+      Optionally includes a label column for machine learning purposes.
+    - get_options(): Parses command-line arguments for input directory, output CSV file, and optional label.
     - check_input_dir_exits(dirToRead): Validates the existence of the input directory.
     - check_output_file(CSV_to_write): Ensures the output CSV file does not already exist.
     - main(): Orchestrates the overall process of reading files, parsing data, and writing to the CSV.
 Usage:
-    python strace_parser.py -d <strace_directory_to_read> -o <output_csv_file>
+    python strace_parser.py -d <strace_directory_to_read> -o <output_csv_file> [-l <label>]
     - The script assumes a specific format for the strace output files.
     - The global variable `all_dicts` is used to store parsed data from all files.
+    - The `--label` option allows adding a label column to the CSV for machine learning purposes.
     - The script exits with an error message if the input directory does not exist or the output file already exists.
-'''
+"""
+import os
 import csv
 import argparse
 
@@ -67,10 +68,12 @@ def create_headers(CSV_to_write, label=None):
     Creates a CSV file with headers and writes the contents of a list of dictionaries to it.
     This function generates a sorted list of unique keys from a global list of dictionaries 
     (`all_dicts`), excluding the key 'filename'. It ensures that 'filename' is always the 
-    first column in the CSV file. The function then writes these headers and the contents 
-    of `all_dicts` to the specified CSV file.
+    first column in the CSV file, and if a label is provided, it ensures 'label' is the 
+    second column. The function then writes these headers and the contents of `all_dicts` 
+    to the specified CSV file.
     Args:
         CSV_to_write (str): The file path of the CSV file to write to.
+        label (str, optional): A label to add to the 'label' column for all rows in the CSV file.
     Raises:
         NameError: If the global variable `all_dicts` is not defined.
         IOError: If there is an issue opening or writing to the specified file.
@@ -99,10 +102,12 @@ def get_options():
     This function uses argparse to define and parse the following arguments:
     - `-d` or `--dir`: Specifies the directory containing strace files to read (required).
     - `-o` or `--output`: Specifies the output CSV file to write the parsed data to (required).
+    - `-l` or `--label`: Specifies an optional label to add to the 'label' column in the CSV file for ML purposes.
     Returns:
         tuple: A tuple containing:
             - dirToRead (str): The directory to read strace files from.
             - CSV_to_write (str): The path to the output CSV file.
+            - label (str or None): The label to add to the 'label' column, or None if not provided.
     """
     
     parser = argparse.ArgumentParser(description='Parse strace output to CSV')
@@ -159,10 +164,10 @@ def main():
     """
     Main function to process files in a specified directory and write results to a CSV file.
     This function performs the following steps:
-    1. Reads the input directory path and output CSV file path from command-line options.
+    1. Reads the input directory path, output CSV file path, and optional label from command-line options.
     2. Validates the existence of the input directory and the output file.
     3. Iterates through all files in the input directory, processing each file.
-    4. Creates headers for the output CSV file.
+    4. Creates headers for the output CSV file, including the optional label if provided.
     Note:
         - The `check_input_dir_exits` function ensures the input directory exists.
         - The `check_output_file` function validates or prepares the output file.
