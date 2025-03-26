@@ -112,9 +112,13 @@ def get_options():
     parser.add_argument('-l','--label', help='Label to add to the label column of the CSV file for ML. '
     'Default includes column and zero for all.', required=False)
     args = parser.parse_args()
+    dirToRead = args.dir
+    CSV_to_write = args.output
+    if args.label is not None:
+        return dirToRead, CSV_to_write, args.label
+    else:
+        return dirToRead, CSV_to_write, None
     
-    return args
-
 def check_input_dir_exits(dirToRead):
     """
     Checks if the specified directory exists.
@@ -167,11 +171,11 @@ def main():
     Raises:
         Any exceptions raised by the helper functions used within this function.
     """
-    print(get_options())
-    dirToRead = check_input_dir_exits(get_options().args.dir)
-    CSV_to_write = check_output_file(get_options().args.output)
-    if get_options().args.label:
-        label = get_options().args.label
+
+    dirToRead = check_input_dir_exits(get_options()[0])
+    CSV_to_write = check_output_file(get_options()[1])
+    if get_options().:
+        label = get_options()[2]
     else:
         label = None
     for f in os.listdir(dirToRead):
