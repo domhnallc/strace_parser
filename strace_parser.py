@@ -62,7 +62,7 @@ def fileReader(fileToOpen):
         print(dict)
         all_dicts.append(dict)
 
-def create_headers(CSV_to_write):
+def create_headers(CSV_to_write, label=None):
     """
     Creates a CSV file with headers and writes the contents of a list of dictionaries to it.
     This function generates a sorted list of unique keys from a global list of dictionaries 
@@ -82,6 +82,10 @@ def create_headers(CSV_to_write):
 
     fieldnames = sorted({key for d in all_dicts for key in d.keys() if key != 'filename'})
     fieldnames.insert(0, 'filename')  # Ensure 'filename' is the first column
+    fieldnames.insert(1, 'label')  # Ensure 'label' is the second column
+    if label:
+        for dict in all_dicts:
+            d['label'] = label  # Set a default value for the 'label' column for all rows
     print(fieldnames)
     with open(CSV_to_write, 'a', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, escapechar="\\")
@@ -170,9 +174,13 @@ def main():
 
     dirToRead = check_input_dir_exits(get_options()[0])
     CSV_to_write = check_output_file(get_options()[1])
+    if get_options()[2] is not None:
+        label = get_options()[2]
+    else:
+        label = None
     for f in os.listdir(dirToRead):
         print(os.path.join(dirToRead, f))
         fileReader(os.path.join(dirToRead, f))
-    create_headers(CSV_to_write)
+    create_headers(CSV_to_write, label)
 
 main()
