@@ -50,7 +50,7 @@ def fileReader(fileToOpen):
         return  # Skip processing if the file is a directory
     else:
         with open(fileToOpen, 'r', errors='ignore') as f:
-            lines = f.readlines()[2:-2]
+            lines = [line for line in f.readlines()[0:-1] if not (line.startswith("---") or line.startswith("%"))]
             dict = {}
             dict.update({'filename': str(fileToOpen)})
             for line in lines:
