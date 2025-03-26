@@ -81,7 +81,7 @@ def create_headers(CSV_to_write):
     """
 
     fieldnames = sorted({key for d in all_dicts for key in d.keys() if key != 'filename'})
-    fieldnames.insert(0, 'filename')  # Ensure 'filename' is at the start
+    fieldnames.insert(0, 'filename')  # Ensure 'filename' is the first column
     print(fieldnames)
     with open(CSV_to_write, 'a', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, escapechar="\\")
@@ -105,12 +105,16 @@ def get_options():
     parser.usage = "python strace_parser.py -d <strace_directory_to_read> -o <output_csv_file>"
     parser.add_argument('-d', '--dir', help='Directory to read strace files from', required=True)
     parser.add_argument('-o', '--output', help='Output CSV file', required=True)
+    parser.add_argument('-l','--label', help='Label to add to the label column of the CSV file for ML. '
+    'Default includes column and zero for all.', required=False)
     args = parser.parse_args()
     dirToRead = args.dir
     CSV_to_write = args.output
-
-    return dirToRead, CSV_to_write
-
+    if args.label is not None:
+        return dirToRead, CSV_to_write, args.label
+    else:
+        return dirToRead, CSV_to_write
+    
 def check_input_dir_exits(dirToRead):
     """
     Checks if the specified directory exists.
