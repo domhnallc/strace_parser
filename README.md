@@ -24,12 +24,13 @@ Parses a folder of strace outputs, counts syscalls and returns a CSV.
 ## Usage
 1. Run the script with the folder containing strace outputs:
     ```bash
-    python strace_parser.py -d /path/to/strace_outputs -o /path/to/output.csv
+    python strace_parser.py -d /path/to/strace_outputs -o /path/to/output.csv -l label_to_apply (optional)
     ```
 2. The resulting CSV file, `output.csv`, will be saved in the directory you specify when running the script.
+
 ## Example
 ```bash
-python strace_parser.py -d /examples -o ./examples.csv
+python strace_parser.py -d ./examples/straces -o ./examples/output/example.csv
 ```
 ### Output (truncated):
 | Filename                  | access | alarm | arch_prctl | brk | close | close_range | connect | execve | fcntl | futex | getdents64 |
