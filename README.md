@@ -3,7 +3,8 @@ Parses a folder of strace outputs, counts syscalls and returns a CSV.
 
 The outputs should be yielded from strace -c:
 
-```$ strace -c ls > /dev/null
+```$ strace -c ls > /dev/null```
+```
 % time     seconds  usecs/call     calls    errors syscall
 ------ ----------- ----------- --------- --------- ----------------
  89.76    0.008016           4      1912           getdents
