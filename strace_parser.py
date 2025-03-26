@@ -114,6 +114,7 @@ def get_options():
     args = parser.parse_args()
     
     return args
+
 def check_input_dir_exits(dirToRead):
     """
     Checks if the specified directory exists.
@@ -166,7 +167,7 @@ def main():
     Raises:
         Any exceptions raised by the helper functions used within this function.
     """
-
+    print(get_options())
     dirToRead = check_input_dir_exits(get_options().args.dir)
     CSV_to_write = check_output_file(get_options().args.output)
     if get_options().args.label:
