@@ -1,3 +1,4 @@
 .~lock.*
 .vscode/settings.json
 __pycache__/test_strace_parser.cpython-310-pytest-8.3.5.pyc
+__pycache__/strace_parser.cpython-310.pyc
